@@ -11,7 +11,7 @@ class Stock < ActiveRecord::Base
     looked_up_stock =  StockQuote::Stock.quote(ticker_symbol)
     return nil unless looked_up_stock.name
     
-    new_stock = new(ticker: looked_up_stock.symbol, name: looked_up_stock.name)
+    new_stock = new(ticker: looked_up_stock.symbol, name: looked_up_stock.name, currency: "USD")
     new_stock.last_price = new_stock.price
     new_stock
   end
