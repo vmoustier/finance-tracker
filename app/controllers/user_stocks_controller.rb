@@ -1,5 +1,6 @@
 class UserStocksController < ApplicationController
-  before_action :set_user_stock, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_stock, only: [:show, :edit, :update]
+  before_action :set_user_stock_for_destroy, only: [:destroy]
 
   # GET /user_stocks
   # GET /user_stocks.json
@@ -86,4 +87,9 @@ class UserStocksController < ApplicationController
     def user_stock_params
       params.require(:user_stock).permit(:user_id, :stock_id)
     end
+    
+    def set_user_stock_for_destroy
+      @user_stock = UserStock.where(stock_id: params[:id], user: current_user).first
+    end
+    
 end
